@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lang.AST;
 
 namespace UniversalTranspiler
 {
-internal class Memo
-{
-    public Ast Ast { get; set; }
-    public int NextIndex { get; set; }
-}
+
 
     internal class ParseableTokenStream<T> : TokenizableStreamBase<Token<T>>
     {
         public ParseableTokenStream(Lexer<T> lexer) : base(() => lexer.Lex().ToList())
         {
         }
-
-        private Dictionary<int, Memo> CachedAst = new Dictionary<int, Memo>();
-
         public bool IsMatch(T type)
         {
             if (Equals(Current.TokenType, type))
@@ -28,37 +20,6 @@ internal class Memo
 
             return false;
         }
-
-        public Ast Capture(Func<Ast> ast)
-        {
-            if (Alt(ast))
-            {
-                return Get(ast);
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Retrieves a cached version if it was found during any alternate route
-        /// otherwise executes it
-        /// </summary>
-        /// <param name="getter"></param>
-        /// <returns></returns>
-        public Ast Get(Func<Ast> getter)
-        {
-            Memo memo;
-            if (!CachedAst.TryGetValue(Index, out memo))
-            {
-                return getter();
-            }
-
-            Index = memo.NextIndex;
-
-            //Console.WriteLine("Returning type {0} from index {1} as memo", memo.Ast, Index);
-            return memo.Ast;
-        } 
-
         public Token<T> Take(T type)
         {
             if (IsMatch(type))
@@ -71,42 +32,6 @@ internal class Memo
             }
 
             throw new InvalidOperationException(String.Format("Invalid Syntax. Expecting {0} but got {1}", type, Current.TokenType));
-        }
-
-
-        
-
-        public Boolean Alt(Func<Ast> action)
-        {
-            TakeSnapshot();
-
-            Boolean found = false;
-
-            try
-            {
-                var currentIndex = Index;
-
-                var ast = action();
-
-                if (ast != null)
-                {
-                    found = true;
-
-                    CachedAst[currentIndex] = new Memo
-                                              {
-                                                  Ast = ast,
-                                                  NextIndex = Index
-                                              };
-                }
-            }
-            catch
-            {
-                
-            }
-
-            RollbackSnapshot();
-
-            return found;
         }
 
         public override Token<T> Peek(int lookahead)
