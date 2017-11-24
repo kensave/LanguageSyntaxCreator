@@ -4,8 +4,6 @@ using System.Linq;
 
 namespace UniversalTranspiler
 {
-
-
     internal class ParseableTokenStream : TokenizableStreamBase<Token>
     {
         public ParseableTokenStream(LexerTokenizer lexer) : base(() => lexer.Lex().ToList())
@@ -17,7 +15,6 @@ namespace UniversalTranspiler
             {
                 return true;
             }
-
             return false;
         }
         public Token Take(string type)
@@ -30,7 +27,6 @@ namespace UniversalTranspiler
 
                 return current;
             }
-
             throw new InvalidOperationException(String.Format("Invalid Syntax. Expecting {0} but got {1}", type, Current.TokenType));
         }
 
@@ -42,7 +38,6 @@ namespace UniversalTranspiler
             {
                 return new Token("EOF");
             }
-
             return peeker;
         }
 
