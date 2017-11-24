@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UniversalTranspiler
 {
-    internal class MatchString<T> : MatcherBase<T>
+    internal class MatchString : MatcherBase
     {
         public const string QUOTE = "\"";
 
@@ -18,7 +18,7 @@ namespace UniversalTranspiler
             StringDelim = delim;
         }
 
-        protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer)
         {
             var str = new StringBuilder();
 
@@ -40,7 +40,7 @@ namespace UniversalTranspiler
 
             if (str.Length > 0)
             {
-                return new Token<T>((T)Enum.Parse(typeof(T), "QuotedString"), str.ToString());
+                return new Token("QuotedString", str.ToString());
             }
 
             return null;

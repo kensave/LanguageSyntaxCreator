@@ -6,29 +6,26 @@ using System.Text.RegularExpressions;
 
 namespace UniversalTranspiler
 {
-    internal class MatchNumber<T> : MatcherBase<T>
+    internal class MatchNumber : MatcherBase
     {
-        protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer)
         {
 
             var leftOperand = GetIntegers(tokenizer);
-
             if (leftOperand != null)
             {
                 if (tokenizer.Current == ".")
                 {
                     tokenizer.Consume();
-
                     var rightOperand = GetIntegers(tokenizer);
-
                     // found a float
                     if (rightOperand != null)
                     {
-                        return new Token<T>((T)Enum.Parse(typeof(T), "Float"), leftOperand + "." + rightOperand);
+                        return new Token("Float", leftOperand + "." + rightOperand);
                     }
                 }
 
-                return new Token<T>((T)Enum.Parse(typeof(T), "Int"), leftOperand);
+                return new Token("Int", leftOperand);
             }
             
             return null;

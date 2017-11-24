@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UniversalTranspiler.Tests
+﻿namespace UniversalTranspiler.Tests
 {
     class Program
     {
@@ -17,8 +11,8 @@ namespace UniversalTranspiler.Tests
                                   { return ""Smilie"" }
                             }
                 ";
-            var parser = new Parser(Enums.Languajes.CSharp, @class);
-            var parser2 = new Parser(Enums.Languajes.Javascript, @class);
+            var parser = new Parser(Enums.Languaje.CSharp, @class);
+            var parser2 = new Parser(Enums.Languaje.Javascript, @class);
         }
     }
 }

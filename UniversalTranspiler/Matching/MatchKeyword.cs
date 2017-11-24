@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace UniversalTranspiler
 {
-    internal class MatchKeyword<T> : MatcherBase<T>
+    internal class MatchKeyword : MatcherBase
     {
         public string Match { get; set; }
 
-        private T TokenType { get; set; }
+        private string TokenType { get; set; }
 
 
         /// <summary>
@@ -18,16 +18,16 @@ namespace UniversalTranspiler
         /// </summary>
         public Boolean AllowAsSubString { get; set; }
 
-        public List<MatchKeyword<T>> SpecialCharacters { get; set; } 
+        public List<MatchKeyword> SpecialCharacters { get; set; } 
 
-        public MatchKeyword(T type, String match)
+        public MatchKeyword(string type, String match)
         {
             Match = match;
             TokenType = type;
             AllowAsSubString = true;
         }
 
-        protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer)
         {
             foreach (var character in Match)
             {
@@ -56,7 +56,7 @@ namespace UniversalTranspiler
 
             if (found)
             {
-                return new Token<T>(TokenType, Match);
+                return new Token(TokenType, Match);
             }
 
             return null;

@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace UniversalTranspiler
 {
-    internal class MatchWord<T> : MatcherBase<T>
+    internal class MatchWord : MatcherBase
     {
-        private List<MatchKeyword<T>> SpecialCharacters { get; set; } 
-        public MatchWord(IEnumerable<IMatcher<T>> keywordMatchers)
+        private List<MatchKeyword> SpecialCharacters { get; set; } 
+        public MatchWord(IEnumerable<IMatcher> keywordMatchers)
         {
-            SpecialCharacters = keywordMatchers.Select(i=>i as MatchKeyword<T>).Where(i=> i != null).ToList();
+            SpecialCharacters = keywordMatchers.Select(i=>i as MatchKeyword).Where(i=> i != null).ToList();
         }
 
-        protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer)
         {
             String current = null;
 
@@ -33,7 +33,7 @@ namespace UniversalTranspiler
                 throw new InvalidOperationException(String.Format("Cannot start a word with a special character {0}", current));
             }
 
-            return new Token<T>((T)Enum.Parse(typeof(T), "Word"), current);
+            return new Token("Word", current);
         }
     }
 }

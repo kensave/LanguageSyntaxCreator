@@ -5,19 +5,19 @@ using System.Text;
 
 namespace UniversalTranspiler
 {
-    internal class Token<T>
+    internal class Token
     {
-        public T TokenType { get; private set; }
+        public string TokenType { get; private set; }
 
         public String TokenValue { get; private set; }
 
-        public Token(T tokenType, String token)
+        public Token(string tokenType, String token)
         {
             TokenType = tokenType;
             TokenValue = token;
         }
 
-        public Token(T tokenType)
+        public Token(string tokenType)
         {
             TokenValue = null;
             TokenType = tokenType;

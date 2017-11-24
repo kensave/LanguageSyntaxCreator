@@ -2,13 +2,13 @@
 using System;
 namespace UniversalTranspiler
 {
-    internal abstract class MatcherBase<T> : IMatcher<T>
+    internal abstract class MatcherBase : IMatcher
     {
-        public Token<T> IsMatch(Tokenizer tokenizer)
+        public Token IsMatch(Tokenizer tokenizer)
         {
             if (tokenizer.End())
             {
-                return new Token<T>((T)Enum.Parse(typeof(T), "EOF"));
+                return new Token("EOF", "EOF");
             }
 
             tokenizer.TakeSnapshot();
@@ -27,6 +27,6 @@ namespace UniversalTranspiler
             return match;
         }
 
-        protected abstract Token<T> IsMatchImpl(Tokenizer tokenizer);
+        protected abstract Token IsMatchImpl(Tokenizer tokenizer);
     }
 }

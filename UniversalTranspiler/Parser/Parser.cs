@@ -6,18 +6,9 @@ namespace UniversalTranspiler
     public class Parser
     {
         private ILanguajeParser _parser;
-        public Parser(Languajes lang, string code)
+        public Parser(Languaje lang, string code)
         {
-            switch (lang)
-            {
-                case Languajes.CSharp:
-                    _parser = new LanguageParser<CSharpTokens>(new Lexer<CSharpTokens>(code));
-                        break;
-                case Languajes.Javascript:
-                    _parser = new LanguageParser<JSTokens>(new Lexer<JSTokens>(code));
-                    break;
-
-            }
+            _parser = new LanguageParser(new LexerTokenizer(code, lang));
         }
     }
 }

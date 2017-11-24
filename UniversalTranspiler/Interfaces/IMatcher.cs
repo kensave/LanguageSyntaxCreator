@@ -3,8 +3,8 @@
 
 namespace UniversalTranspiler
 {
-    internal interface IMatcher<T>
+    internal interface IMatcher
     {
-        Token<T> IsMatch(Tokenizer tokenizer);
+        Token IsMatch(Tokenizer tokenizer);
     }
 }

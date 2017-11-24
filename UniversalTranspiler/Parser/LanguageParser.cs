@@ -2,13 +2,13 @@
 
 namespace UniversalTranspiler
 {
-    internal class LanguageParser<T> : ILanguajeParser
+    internal class LanguageParser : ILanguajeParser
     {
-        private ParseableTokenStream<T> TokenStream { get; set; }
+        private ParseableTokenStream TokenStream { get; set; }
 
-        public LanguageParser(Lexer<T> lexer)
+        public LanguageParser(LexerTokenizer lexer)
         {
-            TokenStream = new ParseableTokenStream<T>(lexer);
+            TokenStream = new ParseableTokenStream(lexer);
         }
     }
     

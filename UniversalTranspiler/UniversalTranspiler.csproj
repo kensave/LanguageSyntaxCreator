@@ -52,7 +52,7 @@
     <Compile Include="Parser\LanguageParser.cs" />
     <Compile Include="Tokenizer\LexerTokenizer.cs" />
     <Compile Include="Matching\MatcherBase.cs" />
-    <Compile Include="Matching\MatchingListFactory.cs" />
+    <Compile Include="LanguagesSyntax\MatchingListFactory.cs" />
     <Compile Include="Matching\MatchKeyword.cs" />
     <Compile Include="Matching\MatchNumber.cs" />
     <Compile Include="Matching\MatchString.cs" />
@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="LanguagesSyntax\CSharp.json" />
+    <None Include="LanguagesSyntax\Javascript.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

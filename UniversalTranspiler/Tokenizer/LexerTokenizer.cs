@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UniversalTranspiler.Enums;
 
 namespace UniversalTranspiler
 {
-    internal class Lexer<T>
+    internal class LexerTokenizer
     {
-        private Tokenizer Tokenizer { get; set; }
+        private Tokenizer _tokenizer { get; set; }
 
-        private IEnumerable<IMatcher<T>> Matchers { get; set; }
+        private IEnumerable<IMatcher> _matchers { get; set; }
 
-        public Lexer(String source)
+        private Languaje _language;
+
+        public LexerTokenizer(String source, Languaje lang)
         {
-            Tokenizer = new Tokenizer(source);
+            _tokenizer = new Tokenizer(source);
+            _language = lang;
         }
 
-        internal IEnumerable<Token<T>> Lex()
+        internal IEnumerable<Token> Lex()
         {
-            Matchers = MatchingListFactory.GetMatchingLIst<T>();
-
+            _matchers = MatchingListFactory.GetMatchingList(_language);
             var current = Next();
 
-            while (current != null && !current.TokenType.Equals((T)Enum.Parse(typeof(T), "EOF")))
-            {
+            while (current != null && !current.TokenType.Equals("EOF"))
+            { 
                 // skip whitespace
-                if (!current.TokenType.Equals((T)Enum.Parse(typeof(T), "WhiteSpace")))
+                if (!current.TokenType.Equals("WhiteSpace"))
                 {
                     yield return current;
                 }
@@ -32,16 +35,15 @@ namespace UniversalTranspiler
                 current = Next();
             }
         }
-        private Token<T> Next()
+        private Token Next()
         {
-            if (Tokenizer.End())
+            if (_tokenizer.End())
             {
-                return new Token<T>((T)Enum.Parse(typeof(T), "EOF"));
+                return new Token("EOF");
             }
-
             return
-                 (from match in Matchers
-                  let token = match.IsMatch(Tokenizer)
+                 (from match in _matchers
+                  let token = match.IsMatch(_tokenizer)
                   where token != null
                   select token).FirstOrDefault();
         }

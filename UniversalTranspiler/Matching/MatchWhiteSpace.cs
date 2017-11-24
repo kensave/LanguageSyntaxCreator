@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 namespace UniversalTranspiler
 {
-    internal class MatchWhiteSpace<T> : MatcherBase<T>
+    internal class MatchWhiteSpace : MatcherBase
     {
-        protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer)
         {
             bool foundWhiteSpace = false;
 
@@ -19,7 +19,7 @@ namespace UniversalTranspiler
 
             if (foundWhiteSpace)
             {
-                return new Token<T>((T)Enum.Parse(typeof(T), "WhiteSpace"));
+                return new Token("WhiteSpace");
             }
 
             return null;
