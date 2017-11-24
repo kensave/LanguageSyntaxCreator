@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace UniversalTranspiler
 {
-    public class MatchWord<T> : MatcherBase<T>
+    internal class MatchWord<T> : MatcherBase<T>
     {
         private List<MatchKeyword<T>> SpecialCharacters { get; set; } 
         public MatchWord(IEnumerable<IMatcher<T>> keywordMatchers)

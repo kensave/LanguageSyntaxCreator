@@ -62,9 +62,10 @@ namespace UniversalTranspiler.Enums
         Try,
         Catch,
         LSquareBracket,
-        RSquareBracket
+        RSquareBracket,
+        Using
     }
-    public enum JSTokens
+    public  enum JSTokens
     {
         Infer,
         Void,
@@ -107,10 +108,8 @@ namespace UniversalTranspiler.Enums
         Double,
         String,
         Method,
-        Class,
         New,
         Compare,
-        Nil,
         NotCompare,
         Try,
         Catch,

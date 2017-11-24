@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace UniversalTranspiler
 {
-    public class MatchNumber<T> : MatcherBase<T>
+    internal class MatchNumber<T> : MatcherBase<T>
     {
         protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
         {

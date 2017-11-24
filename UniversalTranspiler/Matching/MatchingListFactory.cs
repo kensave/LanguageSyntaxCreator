@@ -5,7 +5,7 @@ using UniversalTranspiler.Enums;
 
 namespace UniversalTranspiler
 {
-    public class MatchingListFactory
+    internal class MatchingListFactory
     {
         public static List<IMatcher<T>> GetMatchingLIst<T>()
         {
@@ -33,7 +33,6 @@ namespace UniversalTranspiler
                                   {
                                       new MatchKeyword<JSTokens>(JSTokens.Void, "void"),
                                       new MatchKeyword<JSTokens>(JSTokens.Int, "int"),
-                                      new MatchKeyword<JSTokens>(JSTokens.Fun, "fun"),
                                       new MatchKeyword<JSTokens>(JSTokens.If, "if"),
                                       new MatchKeyword<JSTokens>(JSTokens.Infer, "var"),
                                       new MatchKeyword<JSTokens>(JSTokens.Else, "else"),
@@ -52,8 +51,7 @@ namespace UniversalTranspiler
 
             var specialCharacters = new List<IMatcher<JSTokens>>
                                     {
-                                        new MatchKeyword<JSTokens>(JSTokens.DeRef, "->"),
-                                        new MatchKeyword<JSTokens>(JSTokens.LBracket, "{"),
+                                       new MatchKeyword<JSTokens>(JSTokens.LBracket, "{"),
                                         new MatchKeyword<JSTokens>(JSTokens.RBracket, "}"),
                                         new MatchKeyword<JSTokens>(JSTokens.LSquareBracket, "["),
                                         new MatchKeyword<JSTokens>(JSTokens.RSquareBracket, "]"),
@@ -121,6 +119,7 @@ namespace UniversalTranspiler
                                       new MatchKeyword<CSharpTokens>(CSharpTokens.String, "string"),
                                       new MatchKeyword<CSharpTokens>(CSharpTokens.Method, "method"),
                                       new MatchKeyword<CSharpTokens>(CSharpTokens.Class, "class"),
+                                      new MatchKeyword<CSharpTokens>(CSharpTokens.Using, "using"),
                                       new MatchKeyword<CSharpTokens>(CSharpTokens.New, "new"),
                                       new MatchKeyword<CSharpTokens>(CSharpTokens.Nil, "nil"),
                                       new MatchKeyword<CSharpTokens>(CSharpTokens.Try, "try"),

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 namespace UniversalTranspiler
 {
-    class MatchWhiteSpace<T> : MatcherBase<T>
+    internal class MatchWhiteSpace<T> : MatcherBase<T>
     {
         protected override Token<T> IsMatchImpl(Tokenizer tokenizer)
         {

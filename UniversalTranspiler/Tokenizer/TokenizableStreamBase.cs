@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UniversalTranspiler
 {
-    public class TokenizableStreamBase<T> where T : class
+    internal class TokenizableStreamBase<T> where T : class
     {
         public TokenizableStreamBase(Func<List<T>> extractor)
         {

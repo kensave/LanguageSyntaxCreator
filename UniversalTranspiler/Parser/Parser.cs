@@ -14,7 +14,7 @@ namespace UniversalTranspiler
                     _parser = new LanguageParser<CSharpTokens>(new Lexer<CSharpTokens>(code));
                         break;
                 case Languajes.Javascript:
-                    _parser = new LanguageParser<CSharpTokens>(new Lexer<CSharpTokens>(code));
+                    _parser = new LanguageParser<JSTokens>(new Lexer<JSTokens>(code));
                     break;
 
             }

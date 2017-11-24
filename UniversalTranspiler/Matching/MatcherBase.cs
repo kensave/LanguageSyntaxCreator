@@ -2,7 +2,7 @@
 using System;
 namespace UniversalTranspiler
 {
-    public abstract class MatcherBase<T> : IMatcher<T>
+    internal abstract class MatcherBase<T> : IMatcher<T>
     {
         public Token<T> IsMatch(Tokenizer tokenizer)
         {

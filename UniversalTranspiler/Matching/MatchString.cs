@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UniversalTranspiler
 {
-    public class MatchString<T> : MatcherBase<T>
+    internal class MatchString<T> : MatcherBase<T>
     {
         public const string QUOTE = "\"";
 

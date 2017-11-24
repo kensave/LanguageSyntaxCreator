@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace UniversalTranspiler
 {
-    public class MatchKeyword<T> : MatcherBase<T>
+    internal class MatchKeyword<T> : MatcherBase<T>
     {
         public string Match { get; set; }
 

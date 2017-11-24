@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UniversalTranspiler
 {
-    public class Token<T>
+    internal class Token<T>
     {
         public T TokenType { get; private set; }
 
