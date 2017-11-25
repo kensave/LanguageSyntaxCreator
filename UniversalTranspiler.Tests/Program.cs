@@ -6,13 +6,18 @@
         {
             var @class = @" using System;
                             public class @Foo()
-                          {
+                            {
                                 public string Smile()
                                   { return ""Smilie"" }
+                                private double Once()
+                                {
+                                    return 1.1;
+                                }
+            
                             }
                 ";
-            var parser = new Parser(Enums.Languaje.CSharp, @class);
-            var parser2 = new Parser(Enums.Languaje.Javascript, @class);
+            var parser = new DocumentParser(@class, Enums.Languaje.CSharp );
+            var @ast = parser.Parse();
         }
     }
 }

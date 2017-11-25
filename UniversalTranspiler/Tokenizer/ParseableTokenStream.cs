@@ -27,7 +27,8 @@ namespace UniversalTranspiler
 
                 return current;
             }
-            throw new InvalidOperationException(String.Format("Invalid Syntax. Expecting {0} but got {1}", type, Current.TokenType));
+            return null;
+            //throw new InvalidOperationException(String.Format("Invalid Syntax. Expecting {0} but got {1}", type, Current.TokenType));
         }
 
         public override Token Peek(int lookahead)

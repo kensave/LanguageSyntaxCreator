@@ -17,6 +17,7 @@
     "If": "if",
     "Implements": "implements",
     "Infer": "var",
+    "Interface": "interface",
     "Namespace": "namespace",
     "New": "new",
     "Operator": "operator",
@@ -29,6 +30,7 @@
     "Using": "using",
     "Void": "void",
     "While": "while",
+    "Word":  "AZ-az-09-_@",
     "Yield": "yield"
   },
   "SpecialChars": {
@@ -55,5 +57,18 @@
     "RSquareBracket": "]",
     "SemiColon": ";",
     "Slash": "/"
+  },
+  //    Syntax Definition
+  //  Every Language defines its own Syntax.
+  // We are going to represent each Lenguage syntax following this standart:
+  // {value} We are accesing a value either in the SpecialChars, Keywords or the Syntax it self.
+  // *Means that it's nullable or the it doesn't have to exist.
+  // <{value}> or <{value},{value2}> or <{value},....,{valueN}> Represents a sequence of elements.
+  // (anything) Used to group elements, because in some case the entire Grop may be
+  "Syntax": {
+    "Document": "<{UsingStatement}>* <{NamespaceDeclaration}>* <{TypeDeclaration}*>",
+    "UsingStatement": "{Using} <{Word},({Dot}|{Asterix})*> {SemiColon}",
+    "NamespaceDeclaration": "{Namespace} <{Word},{Dot}*> {LBracket} {RBracket}",
+    "TypeDeclaration": "{Class}|{Interface}|{Enum} <{Word},{Dot}*> {LBracket} {RBracket}"
   }
 }

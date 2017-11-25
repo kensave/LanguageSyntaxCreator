@@ -13,15 +13,18 @@ namespace UniversalTranspiler
 
         private Languaje _language;
 
+        private LexerRepository _repository;
+
         public LexerTokenizer(String source, Languaje lang)
         {
             _tokenizer = new Tokenizer(source);
             _language = lang;
+            _repository = new LexerRepository(lang);
         }
 
         internal IEnumerable<Token> Lex()
         {
-            _matchers = MatchingListFactory.GetMatchingList(_language);
+            _matchers = _repository.GetMatchingList();
             var current = Next();
 
             while (current != null && !current.TokenType.Equals("EOF"))
