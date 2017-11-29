@@ -8,7 +8,7 @@ namespace UniversalTranspiler
 {
     internal class MatchNumber : MatcherBase
     {
-        protected override Token IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer, bool ignoreCase)
         {
 
             var leftOperand = GetIntegers(tokenizer);

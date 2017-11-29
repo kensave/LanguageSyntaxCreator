@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace UniversalTranspiler.Syntax
 {
-    public class SyntaxNodeOr : ISyntaxNode
+    public class SyntaxNodeGroup : ISyntaxNode
     {
         public bool Nullable { get; set; }
 
         public List<ISyntaxNode> Nodes { get; set; } = new List<ISyntaxNode>();
+        public bool TakeUntil { get; set; }
+        public bool IsOr { get; set; }
     }
 }

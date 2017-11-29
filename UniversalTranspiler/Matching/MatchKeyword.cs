@@ -27,11 +27,19 @@ namespace UniversalTranspiler
             AllowAsSubString = true;
         }
 
-        protected override Token IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer, bool ignoreCase)
         {
             foreach (var character in Match)
             {
-                if (tokenizer.Current == character.ToString(CultureInfo.InvariantCulture))
+                var tokenChar = tokenizer.Current;
+                var characterVal = character.ToString(CultureInfo.InvariantCulture);
+                if (ignoreCase)
+                {
+                    tokenChar = tokenChar.ToLower();
+                    characterVal = characterVal.ToLower();
+
+                }
+                if (tokenChar == characterVal)
                 {
                     tokenizer.Consume();
                 }

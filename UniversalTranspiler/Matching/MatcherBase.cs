@@ -4,7 +4,7 @@ namespace UniversalTranspiler
 {
     internal abstract class MatcherBase : IMatcher
     {
-        public Token IsMatch(Tokenizer tokenizer)
+        public Token IsMatch(Tokenizer tokenizer, bool ignoreCase)
         {
             if (tokenizer.End())
             {
@@ -13,7 +13,7 @@ namespace UniversalTranspiler
 
             tokenizer.TakeSnapshot();
 
-            var match = IsMatchImpl(tokenizer);
+            var match = IsMatchImpl(tokenizer, ignoreCase);
 
             if (match == null)
             {
@@ -27,6 +27,6 @@ namespace UniversalTranspiler
             return match;
         }
 
-        protected abstract Token IsMatchImpl(Tokenizer tokenizer);
+        protected abstract Token IsMatchImpl(Tokenizer tokenizer, bool ignoreCase);
     }
 }

@@ -12,10 +12,12 @@ namespace UniversalTranspiler
     {
         private const string LANGUAGESSYNTAXDIR = "LanguagesSyntax";
         private JObject jSonObject;
-        private  Dictionary<string, string> syntaxPatters = new Dictionary<string, string>(128);
-        private  Dictionary<string, string> specialCharacters = new Dictionary<string, string>(128);
-        private  Dictionary<string, string> keywordmatchers = new Dictionary<string, string>(128);
+        private Dictionary<string, string> syntaxPatters = new Dictionary<string, string>(128);
+        private Dictionary<string, string> specialCharacters = new Dictionary<string, string>(128);
+        private Dictionary<string, string> keywordmatchers = new Dictionary<string, string>(128);
+        private bool ignoreCase;
         private Languaje _language;
+        private Dictionary<string, string> customkeywordmatchers = new Dictionary<string, string>(128);
 
         public LexerRepository(Languaje lang)
         {
@@ -45,6 +47,11 @@ namespace UniversalTranspiler
             return syntaxPatters[key];
         }
 
+        public bool IsCaseIgnored()
+        {
+            return ignoreCase;
+
+        }
         public  List<IMatcher> GetMatchingList()
         {
             List <IMatcher> list = new List<IMatcher>();
@@ -71,6 +78,11 @@ namespace UniversalTranspiler
                                                     new MatchWord(specialCharacters)
                                                 });
             return matchers;
+        }
+
+        internal bool IsCustomKeyword(string name)
+        {
+            return customkeywordmatchers.ContainsKey(name);
         }
 
         private List<IMatcher> GetSpecialChars()
@@ -110,6 +122,11 @@ namespace UniversalTranspiler
             {
                 keywordmatchers.Add(keyword.Key.ToString(), keyword.Value.ToString());
             }
+            var custom = jSonObject["CustomKeywords"] as JObject;
+            foreach (var keyword in custom)
+            {
+                customkeywordmatchers.Add(keyword.Key.ToString(), keyword.Value.ToString());
+            }
             var syntaxPatts = jSonObject["Syntax"] as JObject;
             foreach (var syntaxPatt in syntaxPatts)
             {
@@ -120,6 +137,10 @@ namespace UniversalTranspiler
             {
                 specialCharacters.Add(special.Key.ToString(), special.Value.ToString());
             }
+            var ignoreCaseValue = jSonObject["IgnoreCase"];
+            if (ignoreCaseValue != null)
+                ignoreCase = Convert.ToBoolean(ignoreCaseValue);
+
         }
     }
 }

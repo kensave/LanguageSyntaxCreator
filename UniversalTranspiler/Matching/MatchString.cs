@@ -18,7 +18,7 @@ namespace UniversalTranspiler
             StringDelim = delim;
         }
 
-        protected override Token IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer,bool ignoreCase)
         {
             var str = new StringBuilder();
 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UniversalTranspiler.Interfaces;
 using UniversalTranspiler.Syntax;
 
@@ -9,72 +12,127 @@ namespace UniversalTranspiler
         private ParseableTokenStream TokenStream { get; set; }
         private Enums.Languaje _languaje;
         private LexerRepository _repository { get; set; }
-
+        private Stack<JObject> _nodes;
+        private JObject Currrent { get { return _nodes.Peek(); } }
 
         public DocumentParser(string source, Enums.Languaje lang)
         {
             _repository = new LexerRepository(lang);
             TokenStream = new ParseableTokenStream(new LexerTokenizer(source, lang));
             _languaje = lang;
+            _nodes = new Stack<JObject>();
         }
 
         public object Parse()
         {
-            return ParseSyntax("Document");
+            var document = new JObject();
+            _nodes.Push(document);
+            ParseSyntax("Document", false);
+            return Currrent;
         }
 
-        private object ParseSyntax(string syntaxNodeStr)
+        private void ParseSyntax(string syntaxNodeStr, bool takeUntill)
         {
             var syntaxNode = _repository.GetSyntaxPattern(syntaxNodeStr);
             var syntaxReader = new SyntaxReader(syntaxNode, _languaje);
-            var node = syntaxReader.Take();
+            var node = syntaxReader.Take(takeUntill);
             while (node != null)
             {
-                Parse(node);
+                var key = GetKeyFromNode(node);
+                var parsedNode = Parse(node);
+                if (parsedNode != null)
+                    Currrent[key] = parsedNode;
                 node = syntaxReader.Take();
             }
-            return null;
         }
-        private object Parse(ISyntaxNode seq)
+
+        string GetKeyFromNode(ISyntaxNode node)
         {
-            if (seq is SyntaxNodeVariable)
-                Parse(seq as SyntaxNodeVariable);
-            else if (seq is SyntaxSequence)
-                Parse(seq as SyntaxSequence);
-            else if (seq is SyntaxNodeKeyword)
-                Parse(seq as SyntaxNodeKeyword);
-            else if (seq is SyntaxNodeOr)
-                Parse(seq as SyntaxNodeOr);
+            if (node is SyntaxNodeVariable noV)
+                return noV.Name;
+            else if (node is SyntaxSequence)
+                return "values";
+            else if (node is SyntaxNodeKeyword noK)
+                return noK.Name;
+            else if (node is SyntaxNodeGroup)
+                return "val";
             return null;
         }
-        private object Parse(SyntaxSequence seq)
+        private JToken Parse(ISyntaxNode seq)
+        {
+            if (seq is SyntaxNodeVariable snv)
+                return Parse(snv);
+            else if (seq is SyntaxSequence ss)
+                return Parse(ss);
+            else if (seq is SyntaxNodeKeyword s)
+                return Parse(s);
+            else if (seq is SyntaxNodeGroup sng)
+                return Parse(sng);
+            return null;
+        }
+        private JArray Parse(SyntaxSequence seq)
+        {
+            JToken reminder = null;
+            JArray result = null;
+            do
+            {
+                var obj = new JObject();
+                foreach (var node in seq.Nodes)
+                {
+                    var key = GetKeyFromNode(node);
+                    reminder = Parse(node);
+                    if (reminder != null)
+                    {
+                        obj[key] = reminder;
+                    }
+                }
+                if (obj.HasValues)
+                {
+                    result = result ?? new JArray();
+                    result.Add(obj);
+                }
+            } while (reminder != null);
+            return result;
+        }
+        private JToken Parse(SyntaxNodeGroup seq)
         {
             foreach (var node in seq.Nodes)
             {
-                Parse(node);
-            }
-            return null;
-        }
-        private object Parse(SyntaxNodeOr seq)
-        {
-            foreach (var node in seq.Nodes)
-            {
-                if (Parse(node) != null)
-                    break;
+               var result = Parse(node);
+                if (seq.IsOr && result != null)
+                    return result;
+                else
+                {
+                    if (result != null)
+                    {
+                        var key = GetKeyFromNode(node);
+                        Currrent[key] = result;
+                    }
+                }
             }
             return null;
         }
         
-        private object Parse(SyntaxNodeVariable node)
+        private JToken Parse(SyntaxNodeVariable node)
         {
-            return ParseSyntax(node.Name);
+            JObject syntaxObject = new JObject();
+            _nodes.Push(syntaxObject);
+            ParseSyntax(node.Name, node.TakeUntil);
+            _nodes.Pop();
+            if (syntaxObject.HasValues)
+            {
+                return syntaxObject;
+            }
+            else
+                return null;
+
         }
-        private object Parse(SyntaxNodeKeyword node)
+        private JToken Parse(SyntaxNodeKeyword node)
         {
-            var nod = TokenStream.Take(node.Name);
+            var nod = TokenStream.Take(node.Name, node.TakeUntil);
             if (nod != null)
             {
-                return nod;
+                    return new JValue(nod.TokenValue);
             }
             return null;
         }

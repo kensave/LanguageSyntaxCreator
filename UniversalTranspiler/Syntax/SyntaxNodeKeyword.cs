@@ -10,5 +10,6 @@ namespace UniversalTranspiler.Syntax
     {
         public bool Nullable { get; set; }
         public string Name { get; set; }
+        public bool TakeUntil { get; set; }
     }
 }

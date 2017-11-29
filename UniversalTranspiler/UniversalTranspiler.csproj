@@ -81,6 +81,9 @@
     <None Include="LanguagesSyntax\Javascript.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="LanguagesSyntax\Sql.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

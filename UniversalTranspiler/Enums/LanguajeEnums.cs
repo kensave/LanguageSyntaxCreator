@@ -3,6 +3,7 @@
     public enum Languaje
     {
         Javascript,
-        CSharp
+        CSharp,
+        Sql
     }
 }

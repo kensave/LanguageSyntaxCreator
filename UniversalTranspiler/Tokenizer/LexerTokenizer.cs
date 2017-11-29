@@ -15,6 +15,8 @@ namespace UniversalTranspiler
 
         private LexerRepository _repository;
 
+        private bool _ignoreCase { get; set; }
+
         public LexerTokenizer(String source, Languaje lang)
         {
             _tokenizer = new Tokenizer(source);
@@ -25,6 +27,7 @@ namespace UniversalTranspiler
         internal IEnumerable<Token> Lex()
         {
             _matchers = _repository.GetMatchingList();
+            _ignoreCase = _repository.IsCaseIgnored();
             var current = Next();
 
             while (current != null && !current.TokenType.Equals("EOF"))
@@ -46,7 +49,7 @@ namespace UniversalTranspiler
             }
             return
                  (from match in _matchers
-                  let token = match.IsMatch(_tokenizer)
+                  let token = match.IsMatch(_tokenizer, _ignoreCase)
                   where token != null
                   select token).FirstOrDefault();
         }

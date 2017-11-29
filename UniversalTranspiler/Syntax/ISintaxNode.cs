@@ -9,5 +9,6 @@ namespace UniversalTranspiler.Syntax
     public interface ISyntaxNode
     {
         bool Nullable { get; set; }
+        bool TakeUntil { get; set; }
     }
 }

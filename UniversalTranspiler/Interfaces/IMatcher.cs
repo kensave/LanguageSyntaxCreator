@@ -5,6 +5,6 @@ namespace UniversalTranspiler
 {
     internal interface IMatcher
     {
-        Token IsMatch(Tokenizer tokenizer);
+        Token IsMatch(Tokenizer tokenizer, bool ignoreCase);
     }
 }

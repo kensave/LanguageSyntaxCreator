@@ -17,48 +17,62 @@ namespace UniversalTranspiler.Syntax
         }
         public int Index { get; set; }
 
-        public ISyntaxNode Take()
+        public ISyntaxNode Take(bool takeUntilParent = false)
         {
             if (Index == _syntaxPattern.Length)
                 return null;
             char node = _syntaxPattern[Index];
             Index++;
+            bool takeUntil = takeUntilParent;
+            if (node == '^')
+            {
+                node = _syntaxPattern[Index];
+                Index++;
+                takeUntil = true;
+            }
             switch (node)
             {
                 case '{':
-                    return TakePlaceholder();
+                    return TakePlaceholder(takeUntil);
                 case '<':
-                    return TakeSequence();
+                    return TakeSequence(takeUntil);
                 case '(':
-                    return TakeGroup();
+                    return TakeGroup(takeUntil);
             }
             return null;
         }
 
-        private ISyntaxNode TakeGroup()
+        private ISyntaxNode TakeGroup(bool takeUntil)
         {
             var nodes = new List<ISyntaxNode>();
+            bool isOr = false;
             while (_syntaxPattern[Index] != ')')
             {
-                nodes.Add(Take());
+                var innerNodes = new List<ISyntaxNode>();
+                nodes.Add(Take(takeUntil));
                 if (_syntaxPattern[Index] == '|')
+                {
                     Index++;
+                    isOr = true;
+                }
             }
             Index++;
-            var seq = new SyntaxNodeOr()
+            var seq = new SyntaxNodeGroup()
             {
                 Nodes = nodes,
-                Nullable = IsNullable()
+                Nullable = IsNullable(),
+                TakeUntil = takeUntil,
+                IsOr = isOr
             };
             return seq;
         }
 
-        private ISyntaxNode TakeSequence()
+        private ISyntaxNode TakeSequence(bool takeUntil)
         {
             var nodes = new List<ISyntaxNode>();
             while (_syntaxPattern[Index] != '>')
             {
-                nodes.Add(Take());
+                nodes.Add(Take(takeUntil));
                 if (_syntaxPattern[Index] == ',')
                     Index++;
             }
@@ -66,12 +80,13 @@ namespace UniversalTranspiler.Syntax
             var seq = new SyntaxSequence()
             {
                 Nodes = nodes,
-                Nullable = IsNullable()
+                Nullable = IsNullable(),
+                TakeUntil = takeUntil
             };
             return seq;
         }
 
-        private ISyntaxNode TakePlaceholder()
+        private ISyntaxNode TakePlaceholder(bool takeUntil)
         {
             var name = "";
             while (_syntaxPattern[Index] != '}')
@@ -79,21 +94,23 @@ namespace UniversalTranspiler.Syntax
                 name += _syntaxPattern[Index];
                 Index++;
             }
-            bool nullable = IsNullable();
             Index++;
-            if (_repository.IsSpecialCharacter(name) || _repository.IsKeyword(name))
+            bool nullable = IsNullable();
+            if (_repository.IsSpecialCharacter(name) || _repository.IsKeyword(name) || _repository.IsCustomKeyword(name))
             {
                 return new SyntaxNodeKeyword()
                 {
                     Name = name,
-                    Nullable = nullable
+                    Nullable = nullable,
+                    TakeUntil = takeUntil
                 };
             }else
             {
                 return new SyntaxNodeVariable()
                 {
                     Name = name,
-                    Nullable = nullable
+                    Nullable = nullable,
+                    TakeUntil = takeUntil
                 };
             }
 

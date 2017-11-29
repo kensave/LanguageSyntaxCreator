@@ -17,8 +17,10 @@ namespace UniversalTranspiler
             }
             return false;
         }
-        public Token Take(string type)
+        public Token Take(string type, bool takeUntil)
         {
+            if (takeUntil)
+                return TakeUntil(type);
             if (IsMatch(type))
             {
                 var current = Current;
@@ -29,6 +31,20 @@ namespace UniversalTranspiler
             }
             return null;
             //throw new InvalidOperationException(String.Format("Invalid Syntax. Expecting {0} but got {1}", type, Current.TokenType));
+        }
+        public Token TakeUntil(string type)
+        {
+            Token current = null;
+            while (!IsMatch(type))
+            {
+                current = Current;
+                if (current.TokenType == "EOF")
+                    return null;
+                Consume();
+            }
+            current = Current;
+            Consume();
+            return current;
         }
 
         public override Token Peek(int lookahead)

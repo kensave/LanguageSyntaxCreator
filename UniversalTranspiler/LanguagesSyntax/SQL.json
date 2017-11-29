@@ -1,0 +1,53 @@
+{
+  "IgnoreCase": true,
+  "Keywords": {
+    "Create": "CREATE",
+    "Use": "USE",
+    "Go": "GO",
+    "Set": "SET",
+    "Procedure": "PROCEDURE"
+  },
+  "CustomKeywords": {
+    "Int": "",
+    "Word": "",
+    "Float": "",
+    "QuotedString": ""
+  },
+    "SpecialChars": {
+      "CloseParenth": ")",
+      "Comma": ",",
+      "Colon": ":",
+      "Compare": "=",
+      "Dot": ".",
+      "Equals": "=",
+      "GreaterThan": ">",
+      "HashTag": "#",
+      "LBracket": "{",
+      "LessThan": "<",
+      "Minus": "-",
+      "NotCompare": "!=",
+      "OpenParenth": "(",
+      "Or": "||",
+      "Plus": "+",
+      "RBracket": "}",
+      "SemiColon": ";",
+      "Slash": "/"
+    },
+    //    Syntax Definition
+    //  Every Language defines its own Syntax.
+    // We are going to represent each Lenguage syntax following this standart:
+    // {value} We are accesing a value either in the SpecialChars, Keywords or the Syntax it self.
+    // *Means that it's nullable or the it doesn't have to exist.
+    // <{value}> or <{value},{value2}> or <{value},....,{valueN}> Represents a sequence of elements.
+    // (anything) Used to group elements, because in some case the entire Grop may be
+  "Syntax": {
+    "Document": "<^{CreateExpression}>*",
+    "CreateExpression": "{Create} {Procedure} {QualifiedIdentifier} {Parameters}",
+    "QualifiedIdentifier": "<{Word}, {Dot}*>",
+    "Parameters": "<{Param}, {Comma}*>",
+    "Param": "{Word} {Type} {ParamDefaultValue}*",
+    "ParamDefaultValue": "{Equals} ({Word} | {LiteralExpression}})",
+    "Type": "{Word} ({OpenParenth}{LiteralExpression}{CloseParenth})*",
+    "LiteralExpression": "({QuotedString} | {Float} | {Int})"
+  }
+  }

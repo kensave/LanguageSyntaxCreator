@@ -12,7 +12,7 @@ namespace UniversalTranspiler
             SpecialCharacters = keywordMatchers.Select(i=>i as MatchKeyword).Where(i=> i != null).ToList();
         }
 
-        protected override Token IsMatchImpl(Tokenizer tokenizer)
+        protected override Token IsMatchImpl(Tokenizer tokenizer, bool ignoreCase)
         {
             String current = null;
 
