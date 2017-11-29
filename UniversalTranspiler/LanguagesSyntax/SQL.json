@@ -5,7 +5,10 @@
     "Use": "USE",
     "Go": "GO",
     "Set": "SET",
-    "Procedure": "PROCEDURE"
+    "Procedure": "PROCEDURE",
+    "Table": "TABLE",
+    "Function": "FUNCTION",
+    "Database": "DATABASE"
   },
   "CustomKeywords": {
     "Int": "",
@@ -42,12 +45,13 @@
     // (anything) Used to group elements, because in some case the entire Grop may be
   "Syntax": {
     "Document": "<^{CreateExpression}>*",
-    "CreateExpression": "{Create} {Procedure} {QualifiedIdentifier} {Parameters}",
+    "CreateExpression": "{Create} {Entity} {QualifiedIdentifier} {Parameters}",
     "QualifiedIdentifier": "<{Word}, {Dot}*>",
     "Parameters": "<{Param}, {Comma}*>",
     "Param": "{Word} {Type} {ParamDefaultValue}*",
     "ParamDefaultValue": "{Equals} ({Word} | {LiteralExpression}})",
     "Type": "{Word} ({OpenParenth}{LiteralExpression}{CloseParenth})*",
-    "LiteralExpression": "({QuotedString} | {Float} | {Int})"
+    "LiteralExpression": "({QuotedString} | {Float} | {Int})",
+    "Entity": "({Procedure}|{Table}|{Function}|{Database})"
   }
   }

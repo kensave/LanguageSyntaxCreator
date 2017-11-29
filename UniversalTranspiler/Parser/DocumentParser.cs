@@ -41,9 +41,15 @@ namespace UniversalTranspiler
                 var key = GetKeyFromNode(node);
                 var parsedNode = Parse(node);
                 if (parsedNode != null)
-                    Currrent[key] = parsedNode;
+                    AddValueObject(Currrent,key,parsedNode);
                 node = syntaxReader.Take();
             }
+        }
+
+        private void AddValueObject(JObject obj, string key, JToken value)
+        {
+            if(!_repository.IsKeyword(key) && !_repository.IsSpecialCharacter(key))
+                obj[key] = value;
         }
 
         string GetKeyFromNode(ISyntaxNode node)
@@ -83,7 +89,7 @@ namespace UniversalTranspiler
                     reminder = Parse(node);
                     if (reminder != null)
                     {
-                        obj[key] = reminder;
+                         AddValueObject(obj, key, reminder);
                     }
                 }
                 if (obj.HasValues)
@@ -106,7 +112,7 @@ namespace UniversalTranspiler
                     if (result != null)
                     {
                         var key = GetKeyFromNode(node);
-                        Currrent[key] = result;
+                        AddValueObject(Currrent, key, result);
                     }
                 }
             }
