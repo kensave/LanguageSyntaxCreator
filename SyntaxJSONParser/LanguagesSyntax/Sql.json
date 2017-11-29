@@ -49,7 +49,7 @@
     "QualifiedIdentifier": "<{Word}, {Dot}*>",
     "Parameters": "<{Param}, {Comma}*>",
     "Param": "{Word} {Type} {ParamDefaultValue}*",
-    "ParamDefaultValue": "{Equals} ({LiteralExpression}|{Word})",
+    "ParamDefaultValue": "{Equals} ({QuotedString}|{Float}|{Int}|{Word})",
     "Type": "{Word} {TypeSize}*",
     "LiteralExpression": "({QuotedString} | {Float} | {Int})",
     "Entity": "({Proc}|{Procedure}|{Table}|{Function}|{Database})",
