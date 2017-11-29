@@ -12,15 +12,15 @@ namespace UniversalTranspiler
         private ParseableTokenStream TokenStream { get; set; }
         private Enums.Languaje _languaje;
         private LexerRepository _repository { get; set; }
-        private Stack<JToken> _nodes;
-        private JObject Current { get { return _nodes.Peek() as JObject; } }
+        private Stack<JObject> _nodes;
+        private JObject Currrent { get { return _nodes.Peek(); } }
 
         public DocumentParser(string source, Enums.Languaje lang)
         {
             _repository = new LexerRepository(lang);
             TokenStream = new ParseableTokenStream(new LexerTokenizer(source, lang));
             _languaje = lang;
-            _nodes = new Stack<JToken>();
+            _nodes = new Stack<JObject>();
         }
 
         public object Parse()
@@ -28,7 +28,7 @@ namespace UniversalTranspiler
             var document = new JObject();
             _nodes.Push(document);
             ParseSyntax("Document", false);
-            return Current;
+            return Currrent;
         }
 
         private void ParseSyntax(string syntaxNodeStr, bool takeUntill)
@@ -40,18 +40,10 @@ namespace UniversalTranspiler
             {
                 var key = GetKeyFromNode(node);
                 var parsedNode = Parse(node);
-                if (parsedNode != null && key != null)
-                    AddValueObject(Current, key, parsedNode);
-                else if (key == null && parsedNode != null)
-                {
-                    if (_nodes.Count > 1)
-                    {
-                        var PreviousNode = _nodes.ToArray()[1];
-                        AddValueObject(PreviousNode as JObject, syntaxNodeStr, parsedNode);
-                    }else
-                        AddValueObject(Current, syntaxNodeStr, parsedNode);
-
-                }
+                if (parsedNode == null && !node.Nullable)
+                    return;
+                if (parsedNode != null)
+                    AddValueObject(Currrent,key,parsedNode);
                 node = syntaxReader.Take();
             }
         }
@@ -67,11 +59,11 @@ namespace UniversalTranspiler
             if (node is SyntaxNodeVariable noV)
                 return noV.Name;
             else if (node is SyntaxSequence)
-                return null;
+                return "values";
             else if (node is SyntaxNodeKeyword noK)
                 return noK.Name;
             else if (node is SyntaxNodeGroup)
-                return null;
+                return "value";
             return null;
         }
         private JToken Parse(ISyntaxNode seq)
@@ -122,7 +114,7 @@ namespace UniversalTranspiler
                     if (result != null)
                     {
                         var key = GetKeyFromNode(node);
-                        AddValueObject(Current, key, result);
+                        AddValueObject(Currrent, key, result);
                     }
                 }
             }

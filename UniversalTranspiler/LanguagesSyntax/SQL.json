@@ -6,6 +6,7 @@
     "Go": "GO",
     "Set": "SET",
     "Procedure": "PROCEDURE",
+    "Proc": "PROC",
     "Table": "TABLE",
     "Function": "FUNCTION",
     "Database": "DATABASE"
@@ -20,7 +21,6 @@
       "CloseParenth": ")",
       "Comma": ",",
       "Colon": ":",
-      "Compare": "=",
       "Dot": ".",
       "Equals": "=",
       "GreaterThan": ">",
@@ -49,9 +49,10 @@
     "QualifiedIdentifier": "<{Word}, {Dot}*>",
     "Parameters": "<{Param}, {Comma}*>",
     "Param": "{Word} {Type} {ParamDefaultValue}*",
-    "ParamDefaultValue": "{Equals} ({Word} | {LiteralExpression}})",
-    "Type": "{Word} ({OpenParenth}{LiteralExpression}{CloseParenth})*",
+    "ParamDefaultValue": "{Equals} ({LiteralExpression}|{Word})",
+    "Type": "{Word} {TypeSize}*",
     "LiteralExpression": "({QuotedString} | {Float} | {Int})",
-    "Entity": "({Procedure}|{Table}|{Function}|{Database})"
+    "Entity": "({Proc}|{Procedure}|{Table}|{Function}|{Database})",
+    "TypeSize": "({OpenParenth}{LiteralExpression}{CloseParenth})"
   }
   }
