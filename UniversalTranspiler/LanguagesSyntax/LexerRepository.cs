@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UniversalTranspiler.Enums;
+using SyntaxJSONParser.Enums;
 
-namespace UniversalTranspiler
+namespace SyntaxJSONParser
 {
     internal class LexerRepository
     {

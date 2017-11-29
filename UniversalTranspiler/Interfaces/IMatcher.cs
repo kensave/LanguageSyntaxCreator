@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace UniversalTranspiler
+namespace SyntaxJSONParser
 {
     internal interface IMatcher
     {

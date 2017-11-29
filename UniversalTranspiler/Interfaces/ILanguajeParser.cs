@@ -1,4 +1,4 @@
-﻿namespace UniversalTranspiler.Interfaces
+﻿namespace SyntaxJSONParser.Interfaces
 {
     internal interface ILanguajeParser
     {

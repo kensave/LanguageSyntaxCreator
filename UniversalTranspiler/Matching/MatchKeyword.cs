@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace UniversalTranspiler
+namespace SyntaxJSONParser
 {
     internal class MatchKeyword : MatcherBase
     {

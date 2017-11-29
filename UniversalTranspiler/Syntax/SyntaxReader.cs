@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UniversalTranspiler.Enums;
+using SyntaxJSONParser.Enums;
 
-namespace UniversalTranspiler.Syntax
+namespace SyntaxJSONParser.Syntax
 {
     internal class SyntaxReader
     {

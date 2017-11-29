@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace UniversalTranspiler
+namespace SyntaxJSONParser
 {
     internal class Tokenizer : TokenizableStreamBase<String>
     {

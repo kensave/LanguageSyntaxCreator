@@ -1,6 +1,6 @@
 ﻿
 using System;
-namespace UniversalTranspiler
+namespace SyntaxJSONParser
 {
     internal abstract class MatcherBase : IMatcher
     {

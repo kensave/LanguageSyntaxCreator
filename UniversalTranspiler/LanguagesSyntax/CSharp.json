@@ -36,7 +36,7 @@
     "Int": "",
     "Word": "",
     "Float": "",
-    "QuotedString":  ""
+    "QuotedString": ""
   },
   "SpecialChars": {
     "Ampersand": "&",
@@ -70,11 +70,13 @@
   // {value} We are accesing a value either in the SpecialChars, Keywords or the Syntax it self.
   // *Means that it's nullable or the it doesn't have to exist.
   // <{value}> or <{value},{value2}> or <{value},....,{valueN}> Represents a sequence of elements.
+  // ^ Ignores previous untill it appears
   // (anything) Used to group elements, because in some case the entire Grop may be
   "Syntax": {
-    "Document": "<{UsingStatement} | {NamespaceDeclaration}> | <{TypeDeclaration}*>",
+    "Document": "{UsingStatement}* <({NamespaceDeclaration}|{TypeDeclaration})>*",
     "UsingStatement": "{Using} <{Word},({Dot}|{Asterix})*> {SemiColon}",
     "NamespaceDeclaration": "{Namespace} <{Word},{Dot}*> {LBracket} {RBracket}",
-    "TypeDeclaration": "{Class}|{Interface}|{Enum} <{Word},{Dot}*> {LBracket} {RBracket}"
+    "TypeDeclaration": "{Word}* {TopLevelType} {Word} {LBracket} ^{RBracket}",
+    "TopLevelType": "({Class}|{Interface}|{Enum})"
   }
 }

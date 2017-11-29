@@ -1,4 +1,4 @@
-﻿namespace UniversalTranspiler.Enums
+﻿namespace SyntaxJSONParser.Enums
 {
     public enum Languaje
     {
