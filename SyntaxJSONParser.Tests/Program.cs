@@ -27,27 +27,11 @@ namespace SyntaxJSONParser.Tests
                         GO
                         SET QUOTED_IDENTIFIER OFF
                         GO
-                        create PROCEDURE [dbo].[proc_Import_Tax_Rate_Chart]
-                        	@Chart_ID char(16), @Jurisdiction_ID int, @Current_EOY_Rate float = 0, 
-                            @Deferred_BOY_Rate float = 0, @Deferred_EOY_Rate float = 0
-                        AS
-                        BEGIN
-                            if exists (select 'x' from Prov_Tax_Rate_Chart 
-                                       where Prov_Chart_ID = @Chart_ID and Juris_Country_ID = @Jurisdiction_ID)
-                            begin
-                               update Prov_Tax_Rate_Chart 
-                               set    Current_EOY_Rate = @Current_EOY_Rate, 
-                                      Deferred_BOY_Rate = @Deferred_BOY_Rate, Deferred_EOY_Rate = @Deferred_EOY_Rate
-                               where  Prov_Chart_ID = @Chart_ID and Juris_Country_ID = @Jurisdiction_ID
-                            end
-                            else
-                            begin
-                               insert into Prov_Tax_Rate_Chart (Prov_Chart_ID, Juris_Country_ID, Current_EOY_Rate, Deferred_BOY_Rate, Deferred_EOY_Rate)
-                               values (@Chart_ID, @Jurisdiction_ID, @Current_EOY_Rate, @Deferred_BOY_Rate, @Deferred_EOY_Rate)
-                            end
-                        END
+                        create PROCEDURE [dbo].[Test]
+                        	@Test_ID char(16), @Other_ID int, @Current_Test_Rate float = 0, 
+                            @Deferred_BOY_Rate float = 0, @Deferred_Test_Rate float = 0
                         GO";
-              parser = new DocumentParser(sql, Enums.Languaje.Sql);
+            parser = new DocumentParser(sql, Enums.Languaje.Sql);
               @ast = parser.Parse();
         }
     }
