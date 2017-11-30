@@ -49,16 +49,6 @@ namespace SyntaxJSONParser.Tests
                         GO";
               parser = new DocumentParser(sql, Enums.Languaje.Sql);
               @ast = parser.Parse();
-
-            var sps = Directory.GetFiles(@"C:\tr\poc\Screen Conversion\source\Extracted\StoredProcedures");
-            var outDir = @"C:\tr\cust\migration_tools\output\Analisis\ASTs\StoreProcedures AST\";
-            foreach (var sp in sps)
-            {
-                var spText = File.ReadAllText(sp);
-                var p  = new DocumentParser(spText, Enums.Languaje.Sql);
-                var json = p.Parse();
-                File.WriteAllText(outDir + new FileInfo(sp).Name + ".json" , json.ToString());
-            }
         }
     }
 }
