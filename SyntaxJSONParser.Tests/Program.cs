@@ -21,7 +21,7 @@ namespace SyntaxJSONParser.Tests
             var parser = new DocumentParser(@class, Enums.Languaje.CSharp);
             object @ast;// = parser.Parse();
 
-            var sql = @"USE [InRS_TTAX]
+            var sql = @"USE [Test]
                         GO
                         SET ANSI_NULLS ON
                         GO
@@ -32,7 +32,7 @@ namespace SyntaxJSONParser.Tests
                             @Deferred_BOY_Rate float = 0, @Deferred_Test_Rate float = 0
                         GO";
             parser = new DocumentParser(sql, Enums.Languaje.Sql);
-              @ast = parser.Parse();
+            @ast = parser.Parse();
         }
     }
 }
