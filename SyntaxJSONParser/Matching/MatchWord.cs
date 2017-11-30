@@ -33,7 +33,7 @@ namespace SyntaxJSONParser
                 throw new InvalidOperationException(String.Format("Cannot start a word with a special character {0}", current));
             }
 
-            return new Token("Word", current);
+            return new Token("Identifier", current);
         }
     }
 }

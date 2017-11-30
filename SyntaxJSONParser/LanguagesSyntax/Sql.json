@@ -11,48 +11,62 @@
     "Function": "FUNCTION",
     "Database": "DATABASE"
   },
+  "DefinedTypes": {
+    "Char": "CHAR",
+    "Varchar": "VARCHAR",
+    "Tinytext": "TINYTEXT",
+    "Text": "TEXT",
+    "NText": "NTEXT",
+    "Binary": "BINARY",
+    "Varbinary": "VARBINARY",
+    "Nchar": "NCHAR",
+    "Nvarchar": "NVARCHAR",
+    "Image": "BLOB"
+
+  },
   "CustomKeywords": {
     "Int": "",
-    "Word": "",
+    "Identifier": "",
     "Float": "",
-    "QuotedString": ""
+    "QuotedString": "",
+    "DefinedType": ""
   },
-    "SpecialChars": {
-      "CloseParenth": ")",
-      "Comma": ",",
-      "Colon": ":",
-      "Dot": ".",
-      "Equals": "=",
-      "GreaterThan": ">",
-      "HashTag": "#",
-      "LBracket": "{",
-      "LessThan": "<",
-      "Minus": "-",
-      "NotCompare": "!=",
-      "OpenParenth": "(",
-      "Or": "||",
-      "Plus": "+",
-      "RBracket": "}",
-      "SemiColon": ";",
-      "Slash": "/"
-    },
-    //    Syntax Definition
-    //  Every Language defines its own Syntax.
-    // We are going to represent each Lenguage syntax following this standart:
-    // {value} We are accesing a value either in the SpecialChars, Keywords or the Syntax it self.
-    // *Means that it's nullable or the it doesn't have to exist.
-    // <{value}> or <{value},{value2}> or <{value},....,{valueN}> Represents a sequence of elements.
-    // (anything) Used to group elements, because in some case the entire Grop may be
+  "SpecialChars": {
+    "CloseParenth": ")",
+    "Comma": ",",
+    "Colon": ":",
+    "Dot": ".",
+    "Equals": "=",
+    "GreaterThan": ">",
+    "HashTag": "#",
+    "LBracket": "{",
+    "LessThan": "<",
+    "Minus": "-",
+    "NotCompare": "!=",
+    "OpenParenth": "(",
+    "Or": "||",
+    "Plus": "+",
+    "RBracket": "}",
+    "SemiColon": ";",
+    "Slash": "/"
+  },
+  //    Syntax Definition
+  //  Every Language defines its own Syntax.
+  // We are going to represent each Lenguage syntax following this standart:
+  // {value} We are accesing a value either in the SpecialChars, Keywords or the Syntax it self.
+  // *Means that it's nullable or the it doesn't have to exist.
+  // <{value}> or <{value},{value2}> or <{value},....,{valueN}> Represents a sequence of elements.
+  // (anything) Used to group elements, because in some case the entire Grop may be
   "Syntax": {
     "Document": "<^{CreateExpression}>*",
     "CreateExpression": "{Create} {Entity} {QualifiedIdentifier} {Parameters}",
-    "QualifiedIdentifier": "<{Word}, {Dot}*>",
+    "QualifiedIdentifier": "<{Identifier}, {Dot}*>",
     "Parameters": "<{Param}, {Comma}*>",
-    "Param": "{Word} {Type} {ParamDefaultValue}*",
-    "ParamDefaultValue": "{Equals} ({QuotedString}|{Float}|{Int}|{Word})",
-    "Type": "{Word} {TypeSize}*",
+    "Param": "{Identifier} {Type} {ParamDefaultValue}*",
+    "ParamDefaultValue": "{Equals} ({QuotedString}|{Float}|{Int}|{Identifier})",
+    "Type": "{Identifier} {TypeSize}*",
     "LiteralExpression": "({QuotedString} | {Float} | {Int})",
     "Entity": "({Proc}|{Procedure}|{Table}|{Function}|{Database})",
     "TypeSize": "({OpenParenth}{LiteralExpression}{CloseParenth})"
   }
-  }
+}

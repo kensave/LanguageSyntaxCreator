@@ -34,7 +34,7 @@
   },
   "CustomKeywords": {
     "Int": "",
-    "Word": "",
+    "Identifier": "",
     "Float": "",
     "QuotedString": ""
   },
@@ -73,10 +73,10 @@
   // ^ Ignores previous untill it appears
   // (anything) Used to group elements, because in some case the entire Grop may be
   "Syntax": {
-    "Document": "{UsingStatement}* <({NamespaceDeclaration}|{TypeDeclaration})>*",
-    "UsingStatement": "{Using} <{Word},({Dot}|{Asterix})*> {SemiColon}",
-    "NamespaceDeclaration": "{Namespace} <{Word},{Dot}*> {LBracket} {RBracket}",
-    "TypeDeclaration": "{Word}* {TopLevelType} {Word} {LBracket} ^{RBracket}",
+    "Document": "<{UsingStatement}>* <({NamespaceDeclaration}|{TypeDeclaration})>*",
+    "UsingStatement": "{Using} <{Identifier},({Dot}|{Asterix})*> {SemiColon}",
+    "NamespaceDeclaration": "{Namespace} <{Identifier},{Dot}*> {LBracket} {RBracket}",
+    "TypeDeclaration": "{Identifier}* {TopLevelType} {Identifier} {LBracket} ^{RBracket}",
     "TopLevelType": "({Class}|{Interface}|{Enum})"
   }
 }
