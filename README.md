@@ -1,12 +1,10 @@
 Language Syntax Parser
 =
- Based on the LanguageCreator project created by Anton. I'm having fun trying to parse different languages to finally generate it or convert it as required. 
+ Based on the LanguageCreator project created by Anton Kropp. I'm having fun trying to parse different programming languages or pieces of them.
  
   Parsing programming languages is always a challege, every language has it's own flavor and Syntax.
-  
-  Following the standart aproach to parse a language, it's required to have an AST to represent it which means that in most of the cases we should have an Entity per program element(Variable declarations, Statements, Classes, Expressions, etc). Also it's very important to have a Tokenizer set with the right Syntax and Special characters for each language.
  
- In order to speed up this process a little bit, LanguageSyntaxParser takes advantage of how flexible JSON could be and allows you to define all the Language Syntax in a JSON file by specifing the Keywords, Special Characters and Patterns of the language and avoiding you the process of creating an entire AST to parse a piece of code. 
+ LanguageSyntaxParser takes advantage of how flexible JSON could be and allows you to define all the Language Syntax in a JSON file by specifing the Keywords, Special Characters and Patterns of the language and avoiding you the process of creating an entire AST to parse a piece of code. 
  
  Since it follows a pattern matching aproach you don't have to define the entire language syntax if you are going to do something simple. So in order to parse just the code you want, it will be required to specifuy only the syntax used by that specific piece of code.
  
