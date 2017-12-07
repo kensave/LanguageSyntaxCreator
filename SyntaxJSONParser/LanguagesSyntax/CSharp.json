@@ -73,10 +73,12 @@
   // ^ Ignores previous untill it appears
   // (anything) Used to group elements, because in some case the entire Grop may be
   "Syntax": {
-    "Document": "<{UsingStatement}>* <({NamespaceDeclaration}|{TypeDeclaration})>*",
-    "UsingStatement": "{Using} <{Identifier},({Dot}|{Asterix})*> {SemiColon}",
+    "Document": "<{UsingStatement}>* as Usings <({NamespaceDeclaration}|{TypeDeclaration})>* as TopLevel",
+    "UsingStatement": "{Using} <{Identifier},{Dot}*>as Tokens {SemiColon}",
     "NamespaceDeclaration": "{Namespace} <{Identifier},{Dot}*> {LBracket} {RBracket}",
-    "TypeDeclaration": "{Identifier}* {TopLevelType} {Identifier} {LBracket} ^{RBracket}",
-    "TopLevelType": "({Class}|{Interface}|{Enum})"
-  }
+    "ClassDeclaration": "{Identifier}* {Class} {Type} {LBracket} ^{RBracket}",
+    "TypeDeclaration": "{ClassDeclaration}",
+    "Type": "{Identifier}"
+  },
+  "PrettyPrint": {}
 }

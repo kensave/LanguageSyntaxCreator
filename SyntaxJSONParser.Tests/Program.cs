@@ -1,5 +1,4 @@
 ﻿using System.IO;
-
 namespace SyntaxJSONParser.Tests
 {
     class Program
@@ -7,19 +6,14 @@ namespace SyntaxJSONParser.Tests
         static void Main(string[] args)
         {
             var @class = @" using System;
+                            using System.Linq;
                             public class @Foo
                             {
-                                public string Smile()
-                                  { return ""Smilie"" }
-                                private double Once()
-                                {
-                                    return 1.1;
-                                }
-            
+                               
                             }
                 ";
-            var parser = new DocumentParser(@class, Enums.Languaje.CSharp);
-            object @ast;// = parser.Parse();
+            var parser = new DocumentParser(Enums.Language.CSharp);
+            object @ast = parser.Parse(@class).ToString();
 
             var sql = @"USE [Test]
                         GO
@@ -29,10 +23,10 @@ namespace SyntaxJSONParser.Tests
                         GO
                         create PROCEDURE [dbo].[Test]
                         	@Test_ID char(16), @Other_ID int, @Current_Test_Rate float = 0, 
-                            @Deferred_BOY_Rate float = 0, @Deferred_Test_Rate float = 0
+                            @Deferred_BOY_Rate numeric(15,0) = null, @Deferred_Test_Rate float = 0
                         GO";
-            parser = new DocumentParser(sql, Enums.Languaje.Sql);
-            @ast = parser.Parse();
+              parser = new DocumentParser(Enums.Language.Sql);
+              @ast = parser.Parse(sql).ToString();
         }
     }
 }

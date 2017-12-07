@@ -11,7 +11,7 @@
     "Function": "FUNCTION",
     "Database": "DATABASE"
   },
-  "DefinedTypes": {
+  "RuntimeTypes": {
     "Char": "CHAR",
     "Varchar": "VARCHAR",
     "Tinytext": "TINYTEXT",
@@ -25,11 +25,14 @@
 
   },
   "CustomKeywords": {
-    "Int": "",
-    "Identifier": "",
     "Float": "",
+    "Identifier": "",
+    "Int": "",
+    "Lb": "\r\n",
     "QuotedString": "",
-    "DefinedType": ""
+    "RuntimeTypes": "",
+    "Space": " ",
+    "Tab": "\t"
   },
   "SpecialChars": {
     "CloseParenth": ")",
@@ -54,19 +57,35 @@
   //  Every Language defines its own Syntax.
   // We are going to represent each Lenguage syntax following this standart:
   // {value} We are accesing a value either in the SpecialChars, Keywords or the Syntax it self.
-  // *Means that it's nullable or the it doesn't have to exist.
+  // * Means that it's nullable or the it doesn't have to exist.
   // <{value}> or <{value},{value2}> or <{value},....,{valueN}> Represents a sequence of elements.
-  // (anything) Used to group elements, because in some case the entire Grop may be
+  // (anything) Used to group elements.
+  // ^ Take untill, ignores everything before the node.
+  // | In groups processing allow us to add a choise between elements.
+  //as Give an alias to a group or sequence.
   "Syntax": {
     "Document": "<^{CreateExpression}>*",
     "CreateExpression": "{Create} {Entity} {QualifiedIdentifier} {Parameters}",
     "QualifiedIdentifier": "<{Identifier}, {Dot}*>",
     "Parameters": "<{Param}, {Comma}*>",
     "Param": "{Identifier} {Type} {ParamDefaultValue}*",
-    "ParamDefaultValue": "{Equals} ({QuotedString}|{Float}|{Int}|{Identifier})",
-    "Type": "{Identifier} {TypeSize}*",
-    "LiteralExpression": "({QuotedString} | {Float} | {Int})",
-    "Entity": "({Proc}|{Procedure}|{Table}|{Function}|{Database})",
-    "TypeSize": "({OpenParenth}{LiteralExpression}{CloseParenth})"
+    "Argument": "({LiteralExpression}|{Identifier})",
+    "Arguments": "{OpenParenth}<{Argument},{Comma}*>{CloseParenth}",
+    "ParamDefaultValue": "{Equals} ({QuotedString}|{Float}|{Int}|{Identifier}) as Value",
+    "Type": "{Identifier} {Arguments}*",
+    "LiteralExpression": "({QuotedString}|{Float}|{Int}) as Value",
+    "Entity": "({Proc}|{Procedure}|{Table}|{Function}|{Database}) as Value"
+  },
+  //Pretty Print Definition
+  "PrettyPrint": {
+    "Document": "<{CreateExpression}>*",
+    "QualifiedIdentifier": "<{Identifier},{Dot}*>",
+    "CreateExpression": "{Create}{Space}{Entity}{Space}{QualifiedIdentifier}{Parameters}",
+    "Parameters": "<{Space}{Param}, {Comma}*>",
+    "Param": "{Identifier}{Space}{Type}{ParamDefaultValue}*",
+    "Argument": "({LiteralExpression}|{Identifier})",
+    "Arguments": "{OpenParenth}<{Argument},{Comma}*>{CloseParenth}",
+    "ParamDefaultValue": "{Space}{Equals}{Space}{Value}",
+    "Type": "{Identifier}{Arguments}*"
   }
 }

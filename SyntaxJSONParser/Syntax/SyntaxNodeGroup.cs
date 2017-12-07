@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace SyntaxJSONParser.Syntax
 {
-    public class SyntaxSequence : ISyntaxNode
+    public class SyntaxNodeGroup : ISyntaxNode
     {
         public bool Nullable { get; set; }
         public List<ISyntaxNode> Nodes { get; set; } = new List<ISyntaxNode>();
         public bool TakeUntil { get; set; }
-        public string Alias { get; set; }
+        public bool IsOr { get; set; }
+        public ISyntaxNode FoundNode { get; set; }
+        public string Alias { get;set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SyntaxJSONParser.Enums;
+using System.Reflection;
 
 namespace SyntaxJSONParser
 {
@@ -13,21 +14,75 @@ namespace SyntaxJSONParser
         private const string LANGUAGESSYNTAXDIR = "LanguagesSyntax";
         private JObject jSonObject;
         private Dictionary<string, string> syntaxPatters = new Dictionary<string, string>(128);
+        private Dictionary<string, string> prettyPrintPatters = new Dictionary<string, string>(128);
         private Dictionary<string, string> specialCharacters = new Dictionary<string, string>(128);
         private Dictionary<string, string> keywordmatchers = new Dictionary<string, string>(128);
+
+        internal string GetPrettyPrintPattern(string key)
+        {
+            prettyPrintPatters.TryGetValue(key, out string res);
+            return res;
+        }
+
         private bool ignoreCase;
-        private Languaje _language;
+        private Language _language;
         private Dictionary<string, string> customkeywordmatchers = new Dictionary<string, string>(128);
 
-        public LexerRepository(Languaje lang)
+
+        private string LoadDefinitionFromAssembly(string definitionName)
+        {
+            try
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                var resourceName = $"SyntaxJSONParser.{definitionName.Replace('\\', '.')}";
+
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string result = reader.ReadToEnd();
+                    return result;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
+        public LexerRepository(Language lang)
         {
             _language = lang;
             var langKeyStr = lang.ToString();
+
             var file = Path.Combine(LANGUAGESSYNTAXDIR, langKeyStr + ".json");
+            string allText = "";
             if (!File.Exists(file))
-                throw new FileNotFoundException(file + " not found.");
-            jSonObject = (JObject)JsonConvert.DeserializeObject(File.ReadAllText(file));
+            {
+                allText = LoadDefinitionFromAssembly(file);
+                if (allText == null)
+                {
+                    throw new FileNotFoundException(file + " not found and could not be found on the assembly resources either.");
+                }
+            }
+            else
+            {
+                allText = File.ReadAllText(file);
+            }
+            jSonObject = (JObject)JsonConvert.DeserializeObject(allText);
             PopulateCollections();
+        }
+
+        internal string TryGetValue(string name)
+        {
+            var result = "";
+            if (specialCharacters.TryGetValue(name, out result))
+                return result;
+            if (keywordmatchers.TryGetValue(name, out result))
+                return result;
+            if (customkeywordmatchers.TryGetValue(name, out result))
+                return result;
+            return result;
         }
 
         public bool IsKeyword(string key)
@@ -52,9 +107,9 @@ namespace SyntaxJSONParser
             return ignoreCase;
 
         }
-        public  List<IMatcher> GetMatchingList()
+        public List<IMatcher> GetMatchingList()
         {
-            List <IMatcher> list = new List<IMatcher>();
+            List<IMatcher> list = new List<IMatcher>();
 
             var matchers = new List<IMatcher>(128);
             var keywordmatchers = GetKeywords();
@@ -131,6 +186,12 @@ namespace SyntaxJSONParser
             foreach (var syntaxPatt in syntaxPatts)
             {
                 syntaxPatters.Add(syntaxPatt.Key.ToString(), syntaxPatt.Value.ToString());
+            }
+
+            var prettyPatts = jSonObject["PrettyPrint"] as JObject;
+            foreach (var syntaxPatt in prettyPatts)
+            {
+                prettyPrintPatters.Add(syntaxPatt.Key.ToString(), syntaxPatt.Value.ToString());
             }
             var specialChar = jSonObject["SpecialChars"] as JObject;
             foreach (var special in specialChar)

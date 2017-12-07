@@ -1,6 +1,9 @@
 ﻿namespace SyntaxJSONParser.Enums
 {
-    public enum Languaje
+    /// <summary>
+    /// List the supported languages
+    /// </summary>
+    public enum Language
     {
         Javascript,
         CSharp,

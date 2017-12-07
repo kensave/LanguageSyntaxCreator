@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26906.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxJSONParser", "SyntaxJSONParser\SyntaxJSONParser.csproj", "{52B20D1B-ACF7-48EF-9614-FC5E6EFA5822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyntaxJSONParser", "SyntaxJSONParser\SyntaxJSONParser.csproj", "{52B20D1B-ACF7-48EF-9614-FC5E6EFA5822}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxJSONParser.Tests", "SyntaxJSONParser.Tests\SyntaxJSONParser.Tests.csproj", "{934EC2B1-6E14-4F63-8632-125BB708EEFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{EA026D00-940F-4806-920A-1F652B3B5147}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpParserTests", "Tests\CSharpParserTests\CSharpParserTests.csproj", "{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLServerTransactParserTests", "SQLServerTransactParserTests\SQLServerTransactParserTests.csproj", "{A84F4211-0FB3-4450-A9BF-85679251A1DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,9 +37,29 @@ Global
 		{934EC2B1-6E14-4F63-8632-125BB708EEFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{934EC2B1-6E14-4F63-8632-125BB708EEFD}.Release|x86.ActiveCfg = Release|Any CPU
 		{934EC2B1-6E14-4F63-8632-125BB708EEFD}.Release|x86.Build.0 = Release|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Debug|x86.Build.0 = Debug|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Release|x86.ActiveCfg = Release|Any CPU
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D}.Release|x86.Build.0 = Release|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Debug|x86.Build.0 = Debug|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63773EF5-9FC7-4610-943E-D2AF4FB05F0D} = {EA026D00-940F-4806-920A-1F652B3B5147}
+		{A84F4211-0FB3-4450-A9BF-85679251A1DB} = {EA026D00-940F-4806-920A-1F652B3B5147}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D113FF83-703C-4E78-95D7-A685783CB0F5}

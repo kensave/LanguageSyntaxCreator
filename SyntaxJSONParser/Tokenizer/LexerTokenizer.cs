@@ -11,17 +11,16 @@ namespace SyntaxJSONParser
 
         private IEnumerable<IMatcher> _matchers { get; set; }
 
-        private Languaje _language;
+        private Language _language;
 
         private LexerRepository _repository;
 
         private bool _ignoreCase { get; set; }
 
-        public LexerTokenizer(String source, Languaje lang)
+        public LexerTokenizer(String source, LexerRepository repository)
         {
             _tokenizer = new Tokenizer(source);
-            _language = lang;
-            _repository = new LexerRepository(lang);
+            _repository = repository;
         }
 
         internal IEnumerable<Token> Lex()

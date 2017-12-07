@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SyntaxJSONParser.Enums;
+using System.Linq;
 
 namespace SyntaxJSONParser.Syntax
 {
@@ -8,12 +9,10 @@ namespace SyntaxJSONParser.Syntax
     {
         private string _syntaxPattern;
         private LexerRepository _repository;
-        private Languaje _language;
-        public SyntaxReader(string syntaxPattern, Languaje lang)
+        public SyntaxReader(string syntaxPattern, LexerRepository repository)
         {
             _syntaxPattern = syntaxPattern.Replace(" ", "");
-            _language = lang;
-            _repository = new LexerRepository(lang);
+            _repository = repository;
         }
         public int Index { get; set; }
 
@@ -62,7 +61,8 @@ namespace SyntaxJSONParser.Syntax
                 Nodes = nodes,
                 Nullable = IsNullable(),
                 TakeUntil = takeUntil,
-                IsOr = isOr
+                IsOr = isOr,
+                Alias = GetAlias()
             };
             return seq;
         }
@@ -81,7 +81,8 @@ namespace SyntaxJSONParser.Syntax
             {
                 Nodes = nodes,
                 Nullable = IsNullable(),
-                TakeUntil = takeUntil
+                TakeUntil = takeUntil,
+                Alias = GetAlias()
             };
             return seq;
         }
@@ -124,6 +125,22 @@ namespace SyntaxJSONParser.Syntax
                 return true;
             }
             return false;
+        }
+
+        private string GetAlias()
+        {
+            string res = null;
+            if (Index < _syntaxPattern.Length && _syntaxPattern[Index] == 'a')
+            {
+                Index+=2;
+                
+                while (Index < _syntaxPattern.Length && (!(new char[] { '{', '<', '(' }.ToList().Contains(_syntaxPattern[Index]))))
+                {
+                    res += _syntaxPattern[Index];
+                    Index++;
+                }
+            }
+            return res;
         }
     }
 }
