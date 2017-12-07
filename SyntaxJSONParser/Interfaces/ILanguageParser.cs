@@ -1,4 +1,4 @@
-﻿namespace SyntaxJSONParser.Interfaces
+﻿namespace LanguageSyntaxParser.Interfaces
 {
     /// <summary>
     /// This interface marks a class as a Languge Parser

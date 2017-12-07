@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SyntaxJSONParser.Enums;
+using LanguageSyntaxParser.Enums;
 using System.Reflection;
 
-namespace SyntaxJSONParser
+namespace LanguageSyntaxParser
 {
     internal class LexerRepository
     {
@@ -34,7 +34,7 @@ namespace SyntaxJSONParser
             try
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                var resourceName = $"SyntaxJSONParser.{definitionName.Replace('\\', '.')}";
+                var resourceName = $"LanguageSyntaxParser.{definitionName.Replace('\\', '.')}";
 
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 using (StreamReader reader = new StreamReader(stream))

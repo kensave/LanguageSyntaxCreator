@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SyntaxJSONParser
+namespace LanguageSyntaxParser
 {
     internal class ParseableTokenStream : TokenizableStreamBase<Token>
     {

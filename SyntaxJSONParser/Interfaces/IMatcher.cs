@@ -1,4 +1,4 @@
-﻿namespace SyntaxJSONParser
+﻿namespace LanguageSyntaxParser
 {
     /// <summary>
     /// A matcher is used to determine is something from the tokenizer is a match

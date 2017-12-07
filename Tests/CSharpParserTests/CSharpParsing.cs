@@ -2,8 +2,8 @@
 namespace CSharpParserTests
 {
 
-    using SyntaxJSONParser;
-    using SyntaxJSONParser.Enums;
+    using LanguageSyntaxParser;
+    using LanguageSyntaxParser.Enums;
     using NUnit.Framework;
     using Newtonsoft.Json.Linq;
     using System.Linq;

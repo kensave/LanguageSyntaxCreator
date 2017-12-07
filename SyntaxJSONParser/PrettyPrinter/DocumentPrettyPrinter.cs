@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SyntaxJSONParser.PrettyPrinter
+namespace LanguageSyntaxParser.PrettyPrinter
 {
     public class DocumentPrettyPrinter
     {

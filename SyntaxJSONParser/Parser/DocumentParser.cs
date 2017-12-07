@@ -2,10 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SyntaxJSONParser.Interfaces;
-using SyntaxJSONParser.Syntax;
+using LanguageSyntaxParser.Interfaces;
+using LanguageSyntaxParser.Syntax;
 
-namespace SyntaxJSONParser
+namespace LanguageSyntaxParser
 {
     /// <summary>
     /// A Language Document parser.

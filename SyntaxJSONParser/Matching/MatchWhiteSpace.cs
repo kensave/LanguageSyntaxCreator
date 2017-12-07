@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace SyntaxJSONParser
+namespace LanguageSyntaxParser
 {
     internal class MatchWhiteSpace : MatcherBase
     {

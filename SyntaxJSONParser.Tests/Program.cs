@@ -1,5 +1,5 @@
 ﻿using System.IO;
-namespace SyntaxJSONParser.Tests
+namespace LanguageSyntaxParser.Tests
 {
     class Program
     {

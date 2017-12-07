@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using SyntaxJSONParser;
-using SyntaxJSONParser.Enums;
+using LanguageSyntaxParser;
+using LanguageSyntaxParser.Enums;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using SyntaxJSONParser.PrettyPrinter;
+using LanguageSyntaxParser.PrettyPrinter;
 
 namespace SQLServerTransactParserTests
 {

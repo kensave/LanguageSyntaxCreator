@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SyntaxJSONParser.Enums;
+using LanguageSyntaxParser.Enums;
 
-namespace SyntaxJSONParser
+namespace LanguageSyntaxParser
 {
     internal class LexerTokenizer
     {

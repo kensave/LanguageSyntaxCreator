@@ -1,4 +1,4 @@
-﻿namespace SyntaxJSONParser.Enums
+﻿namespace LanguageSyntaxParser.Enums
 {
     /// <summary>
     /// List the supported languages

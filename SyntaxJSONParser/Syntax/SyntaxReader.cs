@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using SyntaxJSONParser.Enums;
+using LanguageSyntaxParser.Enums;
 using System.Linq;
 
-namespace SyntaxJSONParser.Syntax
+namespace LanguageSyntaxParser.Syntax
 {
     internal class SyntaxReader
     {

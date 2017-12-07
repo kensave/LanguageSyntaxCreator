@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SyntaxJSONParser.PrettyPrinter
+namespace LanguageSyntaxParser.PrettyPrinter
 {
     internal class PrettyPrintGroup : IPrettyPrintNode
     {

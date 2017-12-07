@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26906.1
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyntaxJSONParser", "SyntaxJSONParser\SyntaxJSONParser.csproj", "{52B20D1B-ACF7-48EF-9614-FC5E6EFA5822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageSyntaxParser", "SyntaxJSONParser\LanguageSyntaxParser.csproj", "{52B20D1B-ACF7-48EF-9614-FC5E6EFA5822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxJSONParser.Tests", "SyntaxJSONParser.Tests\SyntaxJSONParser.Tests.csproj", "{934EC2B1-6E14-4F63-8632-125BB708EEFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageSyntaxParser.Tests", "SyntaxJSONParser.Tests\LanguageSyntaxParser.Tests.csproj", "{934EC2B1-6E14-4F63-8632-125BB708EEFD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{EA026D00-940F-4806-920A-1F652B3B5147}"
 EndProject

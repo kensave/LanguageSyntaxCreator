@@ -1,4 +1,4 @@
-﻿namespace SyntaxJSONParser.PrettyPrinter
+﻿namespace LanguageSyntaxParser.PrettyPrinter
 {
     internal class PrettyPrintKeyword : IPrettyPrintNode
     {

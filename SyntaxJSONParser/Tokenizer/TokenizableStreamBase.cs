@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SyntaxJSONParser
+namespace LanguageSyntaxParser
 {
     internal class TokenizableStreamBase<T> where T : class
     {

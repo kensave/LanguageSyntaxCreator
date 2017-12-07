@@ -61,7 +61,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SyntaxJSONParser\SyntaxJSONParser.csproj">
+    <ProjectReference Include="..\SyntaxJSONParser\LanguageSyntaxParser.csproj">
       <Project>{52b20d1b-acf7-48ef-9614-fc5e6efa5822}</Project>
       <Name>SyntaxJSONParser</Name>
     </ProjectReference>
