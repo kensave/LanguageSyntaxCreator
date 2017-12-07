@@ -1,6 +1,6 @@
 Language Syntax Parser
 =
- Based on the LanguageCreator project created by Anton. I'm having fun trying to parse different languages to finally generate it or convert it as required. 
+ Based on the LanguageCreator project created by Anton Kropp. I'm having fun trying to parse different programming languages or pieces of them.
  
   Parsing programming languages is always a challege, every language has it's own flavor and Syntax.
   
