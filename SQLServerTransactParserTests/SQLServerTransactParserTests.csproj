@@ -61,9 +61,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SyntaxJSONParser\LanguageSyntaxParser.csproj">
+    <ProjectReference Include="..\LanguageSyntaxParser\LanguageSyntaxParser.csproj">
       <Project>{52b20d1b-acf7-48ef-9614-fc5e6efa5822}</Project>
-      <Name>SyntaxJSONParser</Name>
+      <Name>LanguageSyntaxParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

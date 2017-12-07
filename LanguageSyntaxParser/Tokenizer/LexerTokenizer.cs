@@ -10,9 +10,7 @@ namespace LanguageSyntaxParser
         private Tokenizer _tokenizer { get; set; }
 
         private IEnumerable<IMatcher> _matchers { get; set; }
-
-        private Language _language;
-
+        
         private LexerRepository _repository;
 
         private bool _ignoreCase { get; set; }
