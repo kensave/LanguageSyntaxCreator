@@ -6,7 +6,7 @@ Language Syntax Parser
  
  LanguageSyntaxParser takes advantage of how flexible JSON could be and allows you to define all the Language Syntax in a JSON file by specifing the Keywords, Special Characters and Patterns of the language and avoiding you the process of creating an entire AST to parse a piece of code. 
  
- Since it follows a pattern matching aproach you don't have to define the entire language syntax if you are going to do something simple. So in order to parse just the code you want, it will be required to specifuy only the syntax used by that specific piece of code.
+ Since it follows a pattern matching aproach you don't have to define the entire language syntax if you are going to do something simple. So in order to parse just the code you want, it will be required to specify only the syntax used by that specific piece of code.
  
  How Does it work?
 ===
